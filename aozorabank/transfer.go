@@ -1,6 +1,7 @@
 package aozorabank
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/abyssparanoia/go-gmo/internal/pkg/converter"
@@ -120,6 +121,7 @@ func (r *GetTransferStatusRequest) Validate() error {
 }
 
 func (cli *Client) GetTransferStatus(
+	ctx context.Context,
 	req *GetTransferStatusRequest,
 ) (*GetTransferStatusResponse, error) {
 	if err := req.Validate(); err != nil {
@@ -175,6 +177,7 @@ func (r *TransferRequestRequest) Validate() error {
 }
 
 func (cli *Client) TransferRequest(
+	ctx context.Context,
 	req *TransferRequestRequest,
 ) (*TransferRequestResponse, error) {
 	if err := req.Validate(); err != nil {
@@ -210,6 +213,7 @@ func (r *GetRequestResultRequest) Validate() error {
 }
 
 func (cli *Client) GetRequestResult(
+	ctx context.Context,
 	req *GetRequestResultRequest,
 ) (*GetRequestResultResponse, error) {
 	if err := req.Validate(); err != nil {
