@@ -17,23 +17,23 @@ const (
 	QueryKeyClassTransferQueryBulk QueryKeyClass = 2
 )
 
-type RequestTransferStatus int
+type TransferStatus int
 
 const (
-	RequestTransferStatusApplying                RequestTransferStatus = 2
-	RequestTransferStatusReturned                RequestTransferStatus = 3
-	RequestTransferStatusDismiss                 RequestTransferStatus = 4
-	RequestTransferStatusExpired                 RequestTransferStatus = 5
-	RequestTransferStatusApprovalCancelled       RequestTransferStatus = 8
-	RequestTransferStatusInReserve               RequestTransferStatus = 11
-	RequestTransferStatusInProgress              RequestTransferStatus = 12
-	RequestTransferStatusRetrying                RequestTransferStatus = 13
-	RequestTransferStatusCompleted               RequestTransferStatus = 20
-	RequestTransferStatusFundsReturned           RequestTransferStatus = 22
-	RequestTransferStatusTransferReturning       RequestTransferStatus = 24
-	RequestTransferStatusTransferReturnCompleted RequestTransferStatus = 25
-	RequestTransferStatusTransferReturnFailed    RequestTransferStatus = 26
-	RequestTransferStatusFailed                  RequestTransferStatus = 40
+	RequestTransferStatusApplying                TransferStatus = 2
+	RequestTransferStatusReturned                TransferStatus = 3
+	RequestTransferStatusDismiss                 TransferStatus = 4
+	RequestTransferStatusExpired                 TransferStatus = 5
+	RequestTransferStatusApprovalCancelled       TransferStatus = 8
+	RequestTransferStatusInReserve               TransferStatus = 11
+	RequestTransferStatusInProgress              TransferStatus = 12
+	RequestTransferStatusRetrying                TransferStatus = 13
+	RequestTransferStatusCompleted               TransferStatus = 20
+	RequestTransferStatusFundsReturned           TransferStatus = 22
+	RequestTransferStatusTransferReturning       TransferStatus = 24
+	RequestTransferStatusTransferReturnCompleted TransferStatus = 25
+	RequestTransferStatusTransferReturnFailed    TransferStatus = 26
+	RequestTransferStatusFailed                  TransferStatus = 40
 )
 
 type RequestTransferClass int

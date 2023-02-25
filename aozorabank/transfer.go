@@ -22,7 +22,7 @@ type (
 	}
 
 	requestTransferStatus struct {
-		Status RequestTransferStatus `json:"requestTransferStatus,string"`
+		Status TransferStatus `json:"requestTransferStatus,string"`
 	}
 
 	GetTransferStatusResponse struct {
@@ -46,7 +46,7 @@ type (
 	}
 
 	transferDetail struct {
-		TransferStatus     string              `json:"transferStatus"`
+		TransferStatus     TransferStatus      `json:"transferStatus,string"`
 		TransferStatusName string              `json:"transferStatusName"`
 		TransferTypeName   string              `json:"transferTypeName"`
 		IsFeeFreeUse       bool                `json:"isFeeFreeUse"`
