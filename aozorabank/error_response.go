@@ -11,7 +11,7 @@ type ErrorResponse struct {
 
 type ErrorDetail struct {
 	ErrorDetailsCode   string `json:"errorDetailsCode"`
-	ErrorDetailMessage string `json:"errorDetailMessage"`
+	ErrorDetailMessage string `json:"errorDetailsMessage"`
 }
 
 type TransferErrorDetail struct {
