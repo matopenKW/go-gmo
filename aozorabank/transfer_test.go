@@ -1,6 +1,7 @@
 package aozorabank
 
 import (
+	"context"
 	"encoding/json"
 	"gopkg.in/go-playground/assert.v1"
 	"net/http"
@@ -54,7 +55,7 @@ func TestGetTransferStatus(
 
 			cli, _ := NewClient(false, "testAccessToken")
 			cli.APIHost = apiHostTest
-			result, err := cli.GetTransferStatus(tc.request)
+			result, err := cli.GetTransferStatus(context.TODO(), tc.request)
 			assert.Equal(t, nil, err)
 			assert.Equal(t, expected, result)
 		})
@@ -117,7 +118,7 @@ func TestTransferRequest(
 
 			cli, _ := NewClient(false, "testAccessToken")
 			cli.APIHost = apiHostTest
-			result, err := cli.TransferRequest(tc.request)
+			result, err := cli.TransferRequest(context.TODO(), tc.request)
 			assert.Equal(t, nil, err)
 			assert.Equal(t, expected, result)
 		})
@@ -160,7 +161,7 @@ func TestGetRequestResult(
 
 			cli, _ := NewClient(false, "testAccessToken")
 			cli.APIHost = apiHostTest
-			result, err := cli.GetRequestResult(tc.request)
+			result, err := cli.GetRequestResult(context.TODO(), tc.request)
 			assert.Equal(t, nil, err)
 			assert.Equal(t, expected, result)
 		})
