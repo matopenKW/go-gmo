@@ -144,7 +144,7 @@ type (
 		AccountID               string                  `json:"accountId" validate:"required,min=12,max=29"`
 		RemitterName            string                  `json:"remitterName" validate:"omitempty,min=1,max=48"`
 		TransferDesignatedDate  string                  `json:"transferDesignatedDate" validate:"omitempty"`
-		TransferDateHolidayCode TransferDateHolidayCode `json:"transferDateHolidayCode" validate:"omitempty,len=1"`
+		TransferDateHolidayCode TransferDateHolidayCode `json:"transferDateHolidayCode,string" validate:"required,omitempty,len=1"`
 		TotalCount              int                     `json:"totalCount,string" validate:"omitempty,min=1,max=999999"`
 		TotalAmount             int                     `json:"totalAmount,string" validate:"omitempty,min=1,max=999999999999"`
 		ApplyComment            string                  `json:"applyComment" validate:"omitempty,min=1,max=20"`
