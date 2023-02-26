@@ -27,7 +27,7 @@ func TestGetTransferStatus(
 				DateFrom:                "2018-07-30",
 				DateTo:                  "2018-08-10",
 				NextItemKey:             "1234567890",
-				RequestTransferStatuses: []*requestTransferStatus{{RequestTransferStatusApplying}},
+				RequestTransferStatuses: []*RequestTransferStatus{{TransferStatusApplying}},
 				RequestTransferClass:    RequestTransferClassAll,
 				RequestTransferTerm:     RequestTransferTermTransferDesignatedDate,
 			},

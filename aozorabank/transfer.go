@@ -128,13 +128,13 @@ func (cli *Client) GetTransferStatus(
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	reqMap, err := converter.StructToJsonTagMap(req)
-	fmt.Println(reqMap)
+	reqQueryStr, err := converter.StructToJsonTagQueryStr(req)
+	fmt.Println(reqQueryStr)
 	if err != nil {
 		return nil, err
 	}
 	res := &GetTransferStatusResponse{}
-	if _, err := cli.doGet("transfer/status", reqMap, res); err != nil {
+	if _, err := cli.do(http.MethodGet, nil, fmt.Sprintf("transfer/status?%s", reqQueryStr), nil, res); err != nil {
 		return nil, err
 	}
 	return res, nil
@@ -192,7 +192,7 @@ func (cli *Client) TransferRequest(
 	header := http.Header{}
 	header.Set(IdempotencyKeyHeaderKey, req.AccountID)
 	res := &TransferRequestResponse{}
-	if _, err := cli.doPost(header, "transfer/request", reqMap, res); err != nil {
+	if _, err := cli.do(http.MethodPost, header, "transfer/request", reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
@@ -226,7 +226,7 @@ func (cli *Client) GetRequestResult(
 		return nil, err
 	}
 	res := &GetRequestResultResponse{}
-	if _, err := cli.doGet("transfer/request-result", reqMap, res); err != nil {
+	if _, err := cli.do(http.MethodGet, nil, "transfer/request-result", reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
