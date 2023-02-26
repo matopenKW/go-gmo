@@ -50,10 +50,10 @@ type (
 		TransferStatus     TransferStatus      `json:"transferStatus,string"`
 		TransferStatusName string              `json:"transferStatusName"`
 		TransferTypeName   string              `json:"transferTypeName"`
-		IsFeeFreeUse       bool                `json:"isFeeFreeUse"`
-		IsFeePointUse      bool                `json:"isFeePointUse"`
+		IsFeeFreeUse       bool                `json:"isFeeFreeUse,string"`
+		IsFeePointUse      bool                `json:"isFeePointUse,string"`
 		PointName          string              `json:"pointName"`
-		FeeLaterPaymentFlg bool                `json:"feeLaterPaymentFlg"`
+		FeeLaterPaymentFlg bool                `json:"feeLaterPaymentFlg,string"`
 		TransferDetailFee  string              `json:"transferDetailFee"`
 		TotalDebitAmount   string              `json:"totalDebitAmount"`
 		TransferApplies    []*transferApply    `json:"transferApplies"`
