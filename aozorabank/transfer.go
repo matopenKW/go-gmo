@@ -39,7 +39,7 @@ type (
 		DateFrom                string                   `json:"dateFrom"`
 		DateTo                  string                   `json:"dateTo"`
 		RequestNextItemKey      string                   `json:"requestNextItemKey"`
-		RequestTransferStatuses []*requestTransferStatus `json:"requestTransferStatuses,string"`
+		RequestTransferStatuses []*RequestTransferStatus `json:"requestTransferStatuses,string"`
 		RequestTransferClass    string                   `json:"requestTransferClass"`
 		RequestTransferTerm     string                   `json:"requestTransferTerm"`
 		HasNext                 bool                     `json:"hasNext"`
