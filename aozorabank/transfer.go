@@ -17,12 +17,12 @@ type (
 		DateFrom                string                   `json:"dateFrom" validate:"omitempty,len=10"`
 		DateTo                  string                   `json:"dateTo" validate:"omitempty,len=10"`
 		NextItemKey             string                   `json:"nextItemKey" validate:"omitempty,min=1,max=24"`
-		RequestTransferStatuses []*requestTransferStatus `json:"requestTransferStatus" validate:"omitempty"`
+		RequestTransferStatuses []*RequestTransferStatus `json:"requestTransferStatus" validate:"omitempty"`
 		RequestTransferClass    RequestTransferClass     `json:"requestTransferClass,string" validate:"omitempty,oneof=1 3"`
 		RequestTransferTerm     RequestTransferTerm      `json:"requestTransferTerm,string" validate:"omitempty,oneof=1 2"`
 	}
 
-	requestTransferStatus struct {
+	RequestTransferStatus struct {
 		Status TransferStatus `json:"requestTransferStatus,string"`
 	}
 

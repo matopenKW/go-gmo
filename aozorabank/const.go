@@ -20,20 +20,20 @@ const (
 type TransferStatus int
 
 const (
-	RequestTransferStatusApplying                TransferStatus = 2
-	RequestTransferStatusReturned                TransferStatus = 3
-	RequestTransferStatusDismiss                 TransferStatus = 4
-	RequestTransferStatusExpired                 TransferStatus = 5
-	RequestTransferStatusApprovalCancelled       TransferStatus = 8
-	RequestTransferStatusInReserve               TransferStatus = 11
-	RequestTransferStatusInProgress              TransferStatus = 12
-	RequestTransferStatusRetrying                TransferStatus = 13
-	RequestTransferStatusCompleted               TransferStatus = 20
-	RequestTransferStatusFundsReturned           TransferStatus = 22
-	RequestTransferStatusTransferReturning       TransferStatus = 24
-	RequestTransferStatusTransferReturnCompleted TransferStatus = 25
-	RequestTransferStatusTransferReturnFailed    TransferStatus = 26
-	RequestTransferStatusFailed                  TransferStatus = 40
+	TransferStatusApplying                TransferStatus = 2
+	TransferStatusReturned                TransferStatus = 3
+	TransferStatusDismiss                 TransferStatus = 4
+	TransferStatusExpired                 TransferStatus = 5
+	TransferStatusApprovalCancelled       TransferStatus = 8
+	TransferStatusInReserve               TransferStatus = 11
+	TransferStatusInProgress              TransferStatus = 12
+	TransferStatusRetrying                TransferStatus = 13
+	TransferStatusCompleted               TransferStatus = 20
+	TransferStatusFundsReturned           TransferStatus = 22
+	TransferStatusTransferReturning       TransferStatus = 24
+	TransferStatusTransferReturnCompleted TransferStatus = 25
+	TransferStatusTransferReturnFailed    TransferStatus = 26
+	TransferStatusFailed                  TransferStatus = 40
 )
 
 type RequestTransferClass int
