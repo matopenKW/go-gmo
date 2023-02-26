@@ -13,13 +13,13 @@ type (
 	GetTransferStatusRequest struct {
 		AccountID               string                   `json:"accountId" validate:"required,min=12,max=29"`
 		QueryKeyClass           QueryKeyClass            `json:"queryKeyClass,string" validate:"required,oneof=1 2"`
-		ApplyNo                 string                   `json:"applyNo" validate:"omitempty,len=16"`
-		DateFrom                string                   `json:"dateFrom" validate:"omitempty,len=10"`
-		DateTo                  string                   `json:"dateTo" validate:"omitempty,len=10"`
-		NextItemKey             string                   `json:"nextItemKey" validate:"omitempty,min=1,max=24"`
-		RequestTransferStatuses []*RequestTransferStatus `json:"requestTransferStatus" validate:"omitempty"`
-		RequestTransferClass    RequestTransferClass     `json:"requestTransferClass,string" validate:"omitempty,oneof=1 3"`
-		RequestTransferTerm     RequestTransferTerm      `json:"requestTransferTerm,string" validate:"omitempty,oneof=1 2"`
+		ApplyNo                 string                   `json:"applyNo,omitempty" validate:"omitempty,len=16"`
+		DateFrom                string                   `json:"dateFrom,omitempty" validate:"omitempty,len=10"`
+		DateTo                  string                   `json:"dateTo,omitempty" validate:"omitempty,len=10"`
+		NextItemKey             string                   `json:"nextItemKey,omitempty" validate:"omitempty,min=1,max=24"`
+		RequestTransferStatuses []*RequestTransferStatus `json:"requestTransferStatus,omitempty" validate:"omitempty"`
+		RequestTransferClass    RequestTransferClass     `json:"requestTransferClass,string,omitempty" validate:"omitempty,oneof=1 3"`
+		RequestTransferTerm     RequestTransferTerm      `json:"requestTransferTerm,string,omitempty" validate:"omitempty,oneof=1 2"`
 	}
 
 	RequestTransferStatus struct {
@@ -128,13 +128,13 @@ func (cli *Client) GetTransferStatus(
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	reqQueryStr, err := converter.StructToJsonTagQueryStr(req)
-	fmt.Println(reqQueryStr)
+	reqMap, err := converter.StructToJsonTagMap(req)
+	fmt.Println(reqMap)
 	if err != nil {
 		return nil, err
 	}
 	res := &GetTransferStatusResponse{}
-	if _, err := cli.do(http.MethodGet, nil, fmt.Sprintf("transfer/status?%s", reqQueryStr), nil, res); err != nil {
+	if _, err := cli.doGet("transfer/status", reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
@@ -192,7 +192,7 @@ func (cli *Client) TransferRequest(
 	header := http.Header{}
 	header.Set(IdempotencyKeyHeaderKey, req.AccountID)
 	res := &TransferRequestResponse{}
-	if _, err := cli.do(http.MethodPost, header, "transfer/request", reqMap, res); err != nil {
+	if _, err := cli.doPost(header, "transfer/request", reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
@@ -226,7 +226,7 @@ func (cli *Client) GetRequestResult(
 		return nil, err
 	}
 	res := &GetRequestResultResponse{}
-	if _, err := cli.do(http.MethodGet, nil, "transfer/request-result", reqMap, res); err != nil {
+	if _, err := cli.doGet("transfer/request-result", reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil

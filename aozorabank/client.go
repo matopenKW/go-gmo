@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/cenkalti/backoff"
@@ -44,10 +45,35 @@ func NewClient(
 	}, nil
 }
 
-func (c *Client) do(
-	method string,
+func (c *Client) doPost(
 	header http.Header,
 	path string,
+	body map[string]interface{},
+	respBody interface{},
+) (*http.Response, error) {
+	return do(c.HTTPClient, c.accessToken, c.APIHost, header, path, http.MethodPost, body, respBody)
+}
+
+func (c *Client) doGet(
+	path string,
+	body map[string]interface{},
+	respBody interface{},
+) (*http.Response, error) {
+	values := url.Values{}
+	for k, v := range body {
+		values.Add(k, fmt.Sprintf("%s", v))
+	}
+
+	return do(c.HTTPClient, c.accessToken, c.APIHost, nil, fmt.Sprintf("%s?%s", path, values.Encode()), http.MethodGet, body, respBody)
+}
+
+func do(
+	cli *http.Client,
+	accessToken string,
+	apiHost string,
+	header http.Header,
+	path string,
+	method string,
 	body map[string]interface{},
 	respBody interface{},
 ) (*http.Response, error) {
@@ -65,7 +91,7 @@ func (c *Client) do(
 
 	req, err := http.NewRequest(
 		method,
-		fmt.Sprintf("%s/%s", c.APIHost, path),
+		fmt.Sprintf("%s/%s", apiHost, path),
 		bytes.NewBuffer(requestBodyBytes),
 	)
 	if err != nil {
@@ -73,7 +99,7 @@ func (c *Client) do(
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("x-access-token", c.accessToken)
+	req.Header.Set("x-access-token", accessToken)
 	for k, values := range header {
 		for _, v := range values {
 			req.Header.Add(k, v)
@@ -82,7 +108,7 @@ func (c *Client) do(
 	var resp *http.Response
 	backoffCfg := backoff.WithMaxRetries(backoff.NewExponentialBackOff(), 3)
 	err = backoff.Retry(func() (err error) {
-		resp, err = c.HTTPClient.Do(req)
+		resp, err = cli.Do(req)
 		if err != nil {
 			return err
 		}

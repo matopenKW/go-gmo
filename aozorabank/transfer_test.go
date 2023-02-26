@@ -16,8 +16,9 @@ func TestGetTransferStatus(
 	t *testing.T,
 ) {
 	testcases := map[string]struct {
-		request  *GetTransferStatusRequest
-		expected *GetTransferStatusResponse
+		request      *GetTransferStatusRequest
+		expectedPath string
+		expected     *GetTransferStatusResponse
 	}{
 		"ok": {
 			request: &GetTransferStatusRequest{
@@ -30,6 +31,14 @@ func TestGetTransferStatus(
 				RequestTransferStatuses: []*RequestTransferStatus{{TransferStatusApplying}},
 				RequestTransferClass:    RequestTransferClassAll,
 				RequestTransferTerm:     RequestTransferTermTransferDesignatedDate,
+			},
+			expectedPath: "",
+			expected:     fakeData(GetTransferStatusResponse{}),
+		},
+		"ok (required only)": {
+			request: &GetTransferStatusRequest{
+				AccountID:     "111111111111",
+				QueryKeyClass: QueryKeyClassTransferApplies,
 			},
 			expected: fakeData(GetTransferStatusResponse{}),
 		},
