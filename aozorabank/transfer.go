@@ -2,6 +2,7 @@ package aozorabank
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/abyssparanoia/go-gmo/internal/pkg/converter"
@@ -11,7 +12,7 @@ import (
 type (
 	GetTransferStatusRequest struct {
 		AccountID               string                   `json:"accountId" validate:"required,min=12,max=29"`
-		QueryKeyClass           QueryKeyClass            `json:"queryKeyClass,string" validate:"required,oneof=0 1"`
+		QueryKeyClass           QueryKeyClass            `json:"queryKeyClass,string" validate:"required,oneof=1 2"`
 		ApplyNo                 string                   `json:"applyNo" validate:"omitempty,len=16"`
 		DateFrom                string                   `json:"dateFrom" validate:"omitempty,len=10"`
 		DateTo                  string                   `json:"dateTo" validate:"omitempty,len=10"`
@@ -128,6 +129,7 @@ func (cli *Client) GetTransferStatus(
 		return nil, err
 	}
 	reqMap, err := converter.StructToJsonTagMap(req)
+	fmt.Println(reqMap)
 	if err != nil {
 		return nil, err
 	}
