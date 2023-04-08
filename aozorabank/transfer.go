@@ -2,10 +2,15 @@ package aozorabank
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/abyssparanoia/go-gmo/internal/pkg/converter"
 	"github.com/abyssparanoia/go-gmo/internal/pkg/validate"
+)
+
+const (
+	corporationPathV1 = "corporation/v1"
 )
 
 type (
@@ -132,7 +137,7 @@ func (cli *Client) GetTransferStatus(
 		return nil, err
 	}
 	res := &GetTransferStatusResponse{}
-	if _, err := cli.doGet("transfer/status", reqMap, res); err != nil {
+	if _, err := cli.doGet(fmt.Sprintf("%s/transfer/status", corporationPathV1), reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
@@ -190,7 +195,7 @@ func (cli *Client) TransferRequest(
 	header := http.Header{}
 	header.Set(IdempotencyKeyHeaderKey, req.AccountID)
 	res := &TransferRequestResponse{}
-	if _, err := cli.doPost(header, "transfer/request", reqMap, res); err != nil {
+	if _, err := cli.doPost(header, fmt.Sprintf("%s/transfer/request", corporationPathV1), reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
@@ -224,7 +229,7 @@ func (cli *Client) GetRequestResult(
 		return nil, err
 	}
 	res := &GetRequestResultResponse{}
-	if _, err := cli.doGet("transfer/request-result", reqMap, res); err != nil {
+	if _, err := cli.doGet(fmt.Sprintf("%s/transfer/request-result", corporationPathV1), reqMap, res); err != nil {
 		return nil, err
 	}
 	return res, nil
