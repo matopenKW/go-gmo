@@ -33,8 +33,6 @@ func (cli *Client) Authorization(
 	ctx context.Context,
 	req *AuthorizationRequest,
 ) (*AuthorizationResponse, error) {
-
-	//response_type=code&scope=%7B%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%95%E3%82%9A%7D&client_id=%7B%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88ID%7D&state=%7B%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E5%80%A4%7D&redirect_uri=%7B%E3%83%AA%E3%82%BF%E3%82%99%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E7%94%A8URL%7D
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
