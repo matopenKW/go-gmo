@@ -34,3 +34,15 @@ type AuthErrorResponse struct {
 func (errResp *AuthErrorResponse) Error() string {
 	return fmt.Sprintf("Error: [%s:%s],  ErrorURI: %s", errResp.ErrCode, errResp.ErrorDescription, errResp.ErrorURI)
 }
+
+type ErrCode string
+
+const (
+	ErrCodeInvalidToken     ErrCode = "WG_ERR_105"
+	ErrCodeInvalidScope     ErrCode = "WG_ERR_107"
+	ErrCodeUnderMaintenance ErrCode = "WG_ERR_300"
+)
+
+func (e ErrCode) String() string {
+	return string(e)
+}
